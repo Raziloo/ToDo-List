@@ -17,7 +17,16 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/todolistDB", {useNewUrlParser: true});
+
+
+mongoose.connect("mongodb+srv://Raziloo:UFUAjZRFETw6DlAU@cluster0.jhkrblk.mongodb.net/todolistDB", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log("Connected to MongoDB Atlas successfully!");
+})
+.catch(err => console.error(err));
+
 
 const itemsSchema = {
     name: String

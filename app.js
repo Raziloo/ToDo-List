@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const date = require(__dirname + "/date.js");
 const mongoose = require("mongoose");
 
+require('dotenv').config();
+
 
 const app = express();
 
@@ -19,13 +21,13 @@ app.use(express.static("public"));
 
 
 
-mongoose.connect("mongodb+srv://Raziloo:UFUAjZRFETw6DlAU@cluster0.jhkrblk.mongodb.net/todolistDB", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}/${process.env.DB_NAME}`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 }).then(() => {
-    console.log("Connected to MongoDB Atlas successfully!");
-})
-.catch(err => console.error(err));
+  console.log("Connected to MongoDB Atlas successfully!");
+}).catch(err => console.error(err));
+
 
 
 const itemsSchema = {
